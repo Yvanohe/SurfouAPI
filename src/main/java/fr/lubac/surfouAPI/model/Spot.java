@@ -1,21 +1,47 @@
 package fr.lubac.surfouAPI.model;
 
 import java.util.List;
+import java.util.Set;
 
 import org.locationtech.jts.geom.Point;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
 public class Spot {
 	
+	@Id  @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@NotNull
 	private int name;
+	
 	private int city;
 	private Point geom;
+	
+	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "spot")
 	private List<NauticalActivity> nauticalActivities;
+	
 	private String imageUrl;
 	private String comment;
 	private Boolean official;
+	
+	@ManyToOne @JoinColumn(name="id", nullable = false)
 	private User creatorUser;
-	private List<User> bookmarkingUser;
+	
+	@ManyToMany (mappedBy = "bookmarkedSpots")
+	private Set<User> bookmarkingUser; 
+	
+	@ManyToOne
+	@JoinColumn(name ="id", nullable = false)
 	private SpotType type;
 	
 	
@@ -78,10 +104,10 @@ public class Spot {
 	public void setCreatorUser(User creatorUser) {
 		this.creatorUser = creatorUser;
 	}
-	public List<User> getBookmarkingUser() {
+	public Set<User> getBookmarkingUser() {
 		return bookmarkingUser;
 	}
-	public void setBookmarkingUser(List<User> bookmarkingUser) {
+	public void setBookmarkingUser(Set<User> bookmarkingUser) {
 		this.bookmarkingUser = bookmarkingUser;
 	}
 	public SpotType getType() {

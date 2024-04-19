@@ -4,9 +4,10 @@ public class NauticalActivity {
 	private Spot spot;
 	private ActivityDescription activityDescription;
 	private WeatherCondition weatherCondition;
-	private Boolean official;
-	private String description;
 	
+	private String name;
+	private String description;
+	private Boolean official;
 	
 	
 	
@@ -14,8 +15,16 @@ public class NauticalActivity {
 //	===================
 //	GETTERS AND SETTERS
 //	===================
+	
+	
 	public Spot getSpot() {
 		return spot;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public void setSpot(Spot spot) {
 		this.spot = spot;
