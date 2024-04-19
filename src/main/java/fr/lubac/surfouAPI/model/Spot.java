@@ -20,10 +20,18 @@ public class Spot {
 	
 	
 	
-//	==================
+//	===================
 //	GETTERS AND SETTERS
 //	===================
 	
+	public List<NauticalActivity> getNauticalActivities() {
+		return nauticalActivities;
+	}
+
+	public void setNauticalActivities(List<NauticalActivity> nauticalActivities) {
+		this.nauticalActivities = nauticalActivities;
+	}
+
 	public int getId() {
 		return id;
 	}
