@@ -1,13 +1,35 @@
 package fr.lubac.surfouAPI.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+
+@Entity
 public class NauticalActivity {
+	@EmbeddedId
+	private NauticalActivityID id;
+	
+	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@MapsId("spotID")
+	@JoinColumn(name="spot_id")
 	private Spot spot;
+	
+	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@MapsId("activityDescriptionID")
+	@JoinColumn(name="activity_id")
 	private ActivityDescription activityDescription;
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	@MapsId("weatherConditionID")
+	@JoinColumn(name="weather_conditions_id")
 	private WeatherCondition weatherCondition;
 	
 	private String name;
 	private String description;
-	private Boolean official;
+	private boolean official;
 	
 	
 	

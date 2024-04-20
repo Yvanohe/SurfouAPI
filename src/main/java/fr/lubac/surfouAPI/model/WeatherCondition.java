@@ -1,9 +1,17 @@
 package fr.lubac.surfouAPI.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class WeatherCondition {
+	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private int minWindDirection;
-	private int mawWindDirection;
+	private int maxWindDirection;
 	private int minWindForce;
 	private int maxWindForce;
 	private float minTideHeight;
@@ -26,10 +34,10 @@ public class WeatherCondition {
 		this.minWindDirection = minWindDirection;
 	}
 	public int getMawWindDirection() {
-		return mawWindDirection;
+		return maxWindDirection;
 	}
 	public void setMawWindDirection(int mawWindDirection) {
-		this.mawWindDirection = mawWindDirection;
+		this.maxWindDirection = mawWindDirection;
 	}
 	public int getMinWindForce() {
 		return minWindForce;

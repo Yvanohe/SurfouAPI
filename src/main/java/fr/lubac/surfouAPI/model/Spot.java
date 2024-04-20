@@ -1,6 +1,5 @@
 package fr.lubac.surfouAPI.model;
 
-import java.util.List;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Point;
@@ -22,26 +21,26 @@ public class Spot {
 	private int id;
 	
 	@NotNull
-	private int name;
+	private String name;
 	
-	private int city;
+	private String city;
 	private Point geom;
 	
 	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "spot")
-	private List<NauticalActivity> nauticalActivities;
+	private Set<NauticalActivity> nauticalActivities;
 	
 	private String imageUrl;
 	private String comment;
-	private Boolean official;
+	private boolean official;
 	
-	@ManyToOne @JoinColumn(name="id", nullable = false)
+	@ManyToOne @JoinColumn(name="creator_user_id", nullable = false)
 	private User creatorUser;
 	
 	@ManyToMany (mappedBy = "bookmarkedSpots")
 	private Set<User> bookmarkingUser; 
 	
 	@ManyToOne
-	@JoinColumn(name ="id", nullable = false)
+	@JoinColumn(name ="type_id", nullable = false)
 	private SpotType type;
 	
 	
@@ -50,11 +49,11 @@ public class Spot {
 //	GETTERS AND SETTERS
 //	===================
 	
-	public List<NauticalActivity> getNauticalActivities() {
+	public Set<NauticalActivity> getNauticalActivities() {
 		return nauticalActivities;
 	}
 
-	public void setNauticalActivities(List<NauticalActivity> nauticalActivities) {
+	public void setNauticalActivities(Set<NauticalActivity> nauticalActivities) {
 		this.nauticalActivities = nauticalActivities;
 	}
 
@@ -62,16 +61,16 @@ public class Spot {
 		return id;
 	}
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCity() {
+	public String getCity() {
 		return city;
 	}
-	public void setCity(int city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 	public Point getGeom() {

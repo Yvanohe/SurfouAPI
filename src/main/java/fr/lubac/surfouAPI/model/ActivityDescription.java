@@ -1,12 +1,25 @@
 package fr.lubac.surfouAPI.model;
 
-public class ActivityDescription {
+import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
+public class ActivityDescription {
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String name;
 	private String description;
 	private String urlPhoto;
 	
+	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "activityDescription")
+	private Set<NauticalActivity> listActivities;
 	
 	
 	
