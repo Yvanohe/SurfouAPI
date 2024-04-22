@@ -35,6 +35,7 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -44,8 +45,14 @@
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-spatial</artifactId>
-    	<version>6.4.4.Final</version>
-</dependency>		
+    		<version>6.4.4.Final</version>
+		</dependency>
+		<dependency>
+			 <groupId>org.n52.jackson</groupId>
+		     <artifactId>jackson-datatype-jts</artifactId>
+		     <version>1.2.10</version>
+		 </dependency>
+
 	</dependencies>
 
 	<build>

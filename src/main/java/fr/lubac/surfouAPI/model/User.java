@@ -1,5 +1,6 @@
 package fr.lubac.surfouAPI.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -11,10 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
+@Entity @Table(name="user_account")
 public class User {
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
@@ -26,15 +28,17 @@ public class User {
 	private String email;
 	
 	@NotNull
-	private String paswword;
+	private String password;
+	
+	private Date accountCreationDate = new Date(); 
 	
 	@OneToMany (targetEntity = Spot.class, mappedBy = "creatorUser")
 	private List<Spot> spotCreated;
 	
 	@ManyToMany
 	@JoinTable( name = "Users_Spots_bookmarked",
-				joinColumns = @JoinColumn(name="idUser"),
-				inverseJoinColumns = @JoinColumn(name = "idSpot"))
+				joinColumns = @JoinColumn(name="id_user"),
+				inverseJoinColumns = @JoinColumn(name = "id_spot"))
 	private Set<Spot> bookmarkedSpots;
 
 	
@@ -45,6 +49,12 @@ public class User {
 	
 	public String getUsername() {
 		return username;
+	}
+	public Date getAccountCreationDate() {
+		return accountCreationDate;
+	}
+	public void setAccountCreationDate(Date accountCreationDate) {
+		this.accountCreationDate = accountCreationDate;
 	}
 	public List<Spot> getSpotCreated() {
 		return spotCreated;
@@ -61,14 +71,27 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPaswword() {
-		return paswword;
+	public String getPassword() {
+		return password;
 	}
-	public void setPaswword(String paswword) {
-		this.paswword = paswword;
+	public void setPassword(String paswword) {
+		this.password = paswword;
 	}
 	public int getId() {
 		return id;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("User : [")
+			.append("username = ").append(this.getUsername())
+			.append(", email = ").append(this.getEmail())
+			.append(", password = ").append(this.password)
+			.append(", creation date = ").append(this.getAccountCreationDate())
+			.append("]");
+		
+		return sb.toString();
 	}
 
 }

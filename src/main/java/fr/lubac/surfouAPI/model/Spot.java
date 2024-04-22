@@ -4,6 +4,15 @@ import java.util.Set;
 
 import org.locationtech.jts.geom.Point;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+//import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
+//import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
+import org.n52.jackson.datatype.jts.GeometrySerializer;
+import org.n52.jackson.datatype.jts.GeometryDeserializer;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +33,9 @@ public class Spot {
 	private String name;
 	
 	private String city;
+	
+	@JsonSerialize(using = GeometrySerializer.class)
+	@JsonDeserialize(contentUsing = GeometryDeserializer.class)
 	private Point geom;
 	
 	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "spot")
@@ -40,7 +52,7 @@ public class Spot {
 	private Set<User> bookmarkingUser; 
 	
 	@ManyToOne
-	@JoinColumn(name ="type_id", nullable = false)
+	@JoinColumn(name ="type_id")
 	private SpotType type;
 	
 	

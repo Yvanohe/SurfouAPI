@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "Treompan",
+    "city": "Ploudalmézeau",
+    "Latitude": 48.5705177216782,
+    "Longitude": -4.6642385116123,
+    "image_url": "",
+    "comment": "Grande plage avec plusieurs parking à l'Ouest. Lorsqu'il y a de la houle, le spot est principalement pratiqué par des véliplanchistes mais aussi quelques kitesurfers.",
+    "official": 0,
+    "creator_user_id": "Officiel",
+    "type_id": 1,
+    "favori": 0
+  },
+  {
+    "id": 2,
+    "name": "Dunes de Saint-Marguerite",
+    "city": "Landéda",
+    "Latitude": 48.5948373405776,
+    "Longitude": -4.6059105723447,
+    "image_url": "",
+    "comment": "Spot idéal pour débuter en kitesurf ! En effet, à marée haute un bassin se rempli ce qui permet d'avoir pied sur une grande zone. \nGrand parking.",
+    "official": 0,
+    "creator_user_id": "Officiel",
+    "type_id": 1,
+    "favori": 0
+  },
+  {
+    "id": 3,
+    "name": "La palue",
+    "city": "Crozon",
+    "Latitude": 48.2040698150748,
+    "Longitude": -4.54651506045484,
+    "image_url": "",
+    "comment": "Grande plage très connue de la presque ile de Crozon",
+    "official": 0,
+    "creator_user_id": "Officiel",
+    "type_id": 1,
+    "favori": 0
+  },
+  {
+    "id": 4,
+    "name": "Blanc-Sablons",
+    "city": "Le Conquet",
+    "Latitude": 48.3696784917662,
+    "Longitude": -4.76411652032804,
+    "image_url": "",
+    "comment": "Spot de surf grande plage. Il faut une bonne orientation de la houle",
+    "official": 0,
+    "creator_user_id": "Officiel",
+    "type_id": 1,
+    "favori": 0
+  },
+  {
+    "id": 5,
+    "name": "Vougot",
+    "city": "Plouguerneau",
+    "Latitude": 48.6302737250629,
+    "Longitude": -4.45662505162041,
+    "image_url": "",
+    "comment": "Grande plage de sable blanc avec plusieurs parkings. Peut être un peu \"clapoteux\" à marée haute.",
+    "official": 0,
+    "creator_user_id": "Officiel",
+    "type_id": 1,
+    "favori": 0
+  }
+]
