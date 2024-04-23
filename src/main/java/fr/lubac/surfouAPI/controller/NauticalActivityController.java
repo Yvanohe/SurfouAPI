@@ -1,6 +1,7 @@
 package fr.lubac.surfouAPI.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,15 @@ public class NauticalActivityController {
 	@PostMapping("/nauticalactivities")
 	public NauticalActivity createNauticalActivity (@RequestBody NauticalActivity nauticalActivity) {
 		return nauticalActivityService.saveNauticalActivity(nauticalActivity);
+	}
+	
+	/**
+	 * Read - get all nautical activities (ie. particular compatibilities between spots + activity + weather conditions)
+	 * @return
+	 */
+	@GetMapping("/nauticalactivities")
+	public Iterable<NauticalActivity> getNauticalActivities() {
+		return nauticalActivityService.getNauticalActivities();
 	}
 	
 

@@ -47,6 +47,7 @@
 		    <artifactId>hibernate-spatial</artifactId>
     		<version>6.4.4.Final</version>
 		</dependency>
+		<!--The next dependency is needed to serialize/deserialize GeoJson (for spatial data in PostGIS) -->
 		<dependency>
 			 <groupId>org.n52.jackson</groupId>
 		     <artifactId>jackson-datatype-jts</artifactId>

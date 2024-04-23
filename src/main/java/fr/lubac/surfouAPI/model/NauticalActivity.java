@@ -1,5 +1,8 @@
 package fr.lubac.surfouAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -15,14 +18,16 @@ public class NauticalActivity {
 	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@MapsId("spotID")
 	@JoinColumn(name="spot_id")
+	@JsonIgnoreProperties("nauticalActivities")
 	private Spot spot;
 	
 	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@MapsId("activityDescriptionID")
 	@JoinColumn(name="activity_id")
+	@JsonIncludeProperties({"id","name"})
 	private ActivityDescription activityDescription;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST} )
 	@MapsId("weatherConditionID")
 	@JoinColumn(name="weather_conditions_id")
 	private WeatherCondition weatherCondition;

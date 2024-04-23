@@ -1,18 +1,20 @@
 package fr.lubac.surfouAPI.model;
 
+import java.util.List;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Point;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+//Theses ones doesn't work with geojson
 //import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
 //import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
 import org.n52.jackson.datatype.jts.GeometrySerializer;
 import org.n52.jackson.datatype.jts.GeometryDeserializer;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +42,9 @@ public class Spot {
 	private Point geom;
 	
 	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "spot")
-	private Set<NauticalActivity> nauticalActivities;
+	@JsonIncludeProperties("activityDescription")
+	//@JsonBackReference
+	private List<NauticalActivity> nauticalActivities;
 	
 	private String imageUrl;
 	private String comment;
@@ -48,7 +52,7 @@ public class Spot {
 	
 	@ManyToOne @JoinColumn(name="creator_user_id", nullable = false)
 	//@JsonManagedReference
-	@JsonIncludeProperties({"id","username"})
+	@JsonIncludeProperties({"id","username"}) // exclude "spotcreated" to avoid infinite recursion
 	private User creatorUser;
 	
 	@ManyToMany (mappedBy = "bookmarkedSpots")
@@ -57,7 +61,7 @@ public class Spot {
 	
 	@ManyToOne
 	@JoinColumn(name ="type_id")
-	@JsonIncludeProperties("name")
+	@JsonIgnoreProperties("description")
 	private SpotType type;
 	
 	
@@ -66,11 +70,11 @@ public class Spot {
 //	GETTERS AND SETTERS
 //	===================
 	
-	public Set<NauticalActivity> getNauticalActivities() {
+	public List<NauticalActivity> getNauticalActivities() {
 		return nauticalActivities;
 	}
 
-	public void setNauticalActivities(Set<NauticalActivity> nauticalActivities) {
+	public void setNauticalActivities(List<NauticalActivity> nauticalActivities) {
 		this.nauticalActivities = nauticalActivities;
 	}
 
@@ -132,10 +136,7 @@ public class Spot {
 	public void setType(SpotType type) {
 		this.type = type;
 	}
-	
-	
-
-	
-	
+		
+		
 
 }

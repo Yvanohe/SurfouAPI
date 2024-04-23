@@ -13,7 +13,7 @@ public class SpotTypeService {
 	private SpotTypeRepository spotTypeRepository;
 	
 	public SpotType saveSpotType (SpotType spotType) {
-		SpotType savedSpotType = spotTypeRepository.save(saveSpotType(spotType));		
+		SpotType savedSpotType = spotTypeRepository.save(spotType);		
 		return savedSpotType;
 	}
 

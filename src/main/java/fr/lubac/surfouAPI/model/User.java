@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,18 +32,20 @@ public class User {
 	private String email;
 	
 	@NotNull
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
 	private Date accountCreationDate = new Date(); 
 	
 	@OneToMany (targetEntity = Spot.class, mappedBy = "creatorUser")
-	//@JsonBackReference
+	@JsonIncludeProperties({"id","name"})	
 	private List<Spot> spotCreated;
 	
 	@ManyToMany
 	@JoinTable( name = "Users_Spots_bookmarked",
 				joinColumns = @JoinColumn(name="id_user"),
 				inverseJoinColumns = @JoinColumn(name = "id_spot"))
+	@JsonIncludeProperties({"id","name"})	
 	private Set<Spot> bookmarkedSpots;
 
 	
@@ -51,6 +56,12 @@ public class User {
 	
 	public String getUsername() {
 		return username;
+	}
+	public Set<Spot> getBookmarkedSpots() {
+		return bookmarkedSpots;
+	}
+	public void setBookmarkedSpots(Set<Spot> bookmarkedSpots) {
+		this.bookmarkedSpots = bookmarkedSpots;
 	}
 	public Date getAccountCreationDate() {
 		return accountCreationDate;

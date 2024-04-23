@@ -10,6 +10,13 @@ public class WeatherCondition {
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	/*
+	 * Directions in degree (°%360)
+	 * Force in knots (kn)
+	 * Heights in meters (m)
+	 * Periods in seconds (s)
+	 */
+	
 	private int minWindDirection;
 	private int maxWindDirection;
 	private int minWindForce;

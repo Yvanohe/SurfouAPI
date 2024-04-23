@@ -1,5 +1,7 @@
 package fr.lubac.surfouAPI.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,17 @@ public class NauticalActivityService {
 	public NauticalActivity saveNauticalActivity (NauticalActivity nauticalActivity) {
 		NauticalActivity savedNauticalActivity = nauticalActivityRepository.save(nauticalActivity);
 		return savedNauticalActivity;
+	}
+	
+	public Iterable<NauticalActivity> getNauticalActivities() {
+		return nauticalActivityRepository.findAll();
+	}
+	
+	public void deleteAllNauticalActivitiesInGivenList (List<NauticalActivity> nauticalActivities_list){
+		for (NauticalActivity na : nauticalActivities_list ) {
+			nauticalActivityRepository.delete(na);
+		}
+		
 	}
 
 }

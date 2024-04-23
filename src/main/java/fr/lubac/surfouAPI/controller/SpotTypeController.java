@@ -19,7 +19,7 @@ public class SpotTypeController {
 	 * @param SpotType object
 	 * @return saved SpotType object 
 	 */
-	@PostMapping("/types")
+	@PostMapping("/spottypes")
 	public SpotType createSpotType (@RequestBody SpotType spotType) {
 		return spotTypeService.saveSpotType(spotType);
 	}

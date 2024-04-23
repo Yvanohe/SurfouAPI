@@ -1,0 +1,74 @@
+[
+  {
+    "id_conditionsMeteo": 1,
+    "Direction_vent_borne_min": 270,
+    "Direction_vent_borne_max": 90,
+    "vitesse_vent_min": 13,
+    "vitesse_vent_max": 35,
+    "Hauteur_maree_min": 2,
+    "Direction_vague_borne_min": 315,
+    "Direction_vague_borne_max": 0,
+    "periode_vague_min": 12,
+    "periode_vague_max": 20
+  },
+  {
+    "id_conditionsMeteo": 2,
+    "Direction_vent_borne_min": 180,
+    "Direction_vent_borne_max": 0,
+    "vitesse_vent_min": 13,
+    "vitesse_vent_max": 35,
+    "Hauteur_maree_min": 3,
+    "Direction_vague_borne_min": "",
+    "Direction_vague_borne_max": "",
+    "periode_vague_min": "",
+    "periode_vague_max": ""
+  },
+  {
+    "id_conditionsMeteo": 3,
+    "Direction_vent_borne_min": 0,
+    "Direction_vent_borne_max": 360,
+    "vitesse_vent_min": 0,
+    "vitesse_vent_max": 10,
+    "Hauteur_maree_min": 3,
+    "Direction_vague_borne_min": 225,
+    "Direction_vague_borne_max": 315,
+    "periode_vague_min": 10,
+    "periode_vague_max": 20
+  },
+  {
+    "id_conditionsMeteo": 4,
+    "Direction_vent_borne_min": 0,
+    "Direction_vent_borne_max": 45,
+    "vitesse_vent_min": 17,
+    "vitesse_vent_max": 35,
+    "Hauteur_maree_min": "",
+    "Direction_vague_borne_min": "",
+    "Direction_vague_borne_max": "",
+    "periode_vague_min": "",
+    "periode_vague_max": ""
+  },
+  {
+    "id_conditionsMeteo": 5,
+    "Direction_vent_borne_min": 225,
+    "Direction_vent_borne_max": 45,
+    "vitesse_vent_min": 15,
+    "vitesse_vent_max": 35,
+    "Hauteur_maree_min": "",
+    "Direction_vague_borne_min": "",
+    "Direction_vague_borne_max": "",
+    "periode_vague_min": "",
+    "periode_vague_max": ""
+  },
+  {
+    "id_conditionsMeteo": 6,
+    "Direction_vent_borne_min": 0,
+    "Direction_vent_borne_max": 360,
+    "vitesse_vent_min": 0,
+    "vitesse_vent_max": 10,
+    "Hauteur_maree_min": 3,
+    "Direction_vague_borne_min": 315,
+    "Direction_vague_borne_max": 338,
+    "periode_vague_min": 10,
+    "periode_vague_max": 20
+  }
+]
