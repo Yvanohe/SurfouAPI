@@ -28,7 +28,12 @@ public class SpotService {
             // This could be logging, throwing an exception, or any other business logic.
             return null; 
         }
-	}	
+	}
 	
+	
+	public Iterable<Spot> getSpots() {
+		System.out.println("find all");
+		return spotRepository.findAll();
+	}
 
 }
