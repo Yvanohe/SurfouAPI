@@ -15,4 +15,8 @@ public class WeatherConditionService {
 		WeatherCondition savedWeatherCondition = weatherConditionRepository.save(weatherCondition);
 		return savedWeatherCondition;
 	}
+	
+	public Iterable<WeatherCondition> getWeatherConditions () {
+		return weatherConditionRepository.findAll();
+	}
 }

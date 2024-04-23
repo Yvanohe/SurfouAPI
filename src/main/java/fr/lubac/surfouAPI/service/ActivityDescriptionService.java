@@ -15,5 +15,9 @@ public class ActivityDescriptionService {
 		ActivityDescription savedActivityDescription = activityDescriptionRepository.save(activityDescription);
 		return savedActivityDescription;	
 	}
+	
+	public Iterable<ActivityDescription> getActivityDescriptions(){
+		return activityDescriptionRepository.findAll();
+	}
 
 }

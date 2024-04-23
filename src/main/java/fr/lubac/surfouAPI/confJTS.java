@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class confJTS {
-//register the JTS module with Jackson : allow to serialize/deserialize GeoJso
+//register the JTS module with Jackson : allow to serialize/deserialize GeoJson
 	@Bean
 	public JtsModule jtsModule()
 	{

@@ -31,6 +31,7 @@ public class NauticalActivityController {
 	 */
 	@GetMapping("/nauticalactivities")
 	public Iterable<NauticalActivity> getNauticalActivities() {
+		System.out.println("ICI");
 		return nauticalActivityService.getNauticalActivities();
 	}
 	

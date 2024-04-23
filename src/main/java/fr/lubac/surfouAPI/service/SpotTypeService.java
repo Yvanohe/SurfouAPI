@@ -1,5 +1,6 @@
 package fr.lubac.surfouAPI.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,10 @@ public class SpotTypeService {
 	public SpotType saveSpotType (SpotType spotType) {
 		SpotType savedSpotType = spotTypeRepository.save(spotType);		
 		return savedSpotType;
+	}
+	
+	public Iterable<SpotType> getSpotTypes () {
+		return spotTypeRepository.findAll();
 	}
 
 }

@@ -1,7 +1,0 @@
-id_conditionsMeteo,Direction_vent_borne_min,Direction_vent_borne_max,vitesse_vent_min,vitesse_vent_max,Hauteur_maree_min,Direction_vague_borne_min,Direction_vague_borne_max,periode_vague_min,periode_vague_max
-1,270,90,13,35,2,315,0,12,20
-2,180,0,13,35,3,,,,
-3,0,360,0,10,3,225,315,10,20
-4,0,45,17,35,,,,,
-5,225,45,15,35,,,,,
-6,0,360,0,10,3,315,338,10,20
