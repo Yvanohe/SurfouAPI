@@ -13,25 +13,34 @@ Endpoints :
 url on local database : http://localhost:9000/v1
 
 GET /spots  
-GET /spots/{id} 
+
+GET /spots/{id}
+
 POST /spots
+
 DELETE /spots/{id}
 (For spots objects : geometry a GEOJSON)
 
 GET /spottypes
+
 POST /spottypes
 
 GET /nauticalactivities
+
 POST /nauticalactivities
 
 GET /activitiesdescriptions
+
 POST /activitiesdescriptions
 
 GET /conditions
+
 POST /conditions
 
 GET /users
+
 GET /users/{id}
+
 POST /users
 
 WORK IN PROGRESS 
