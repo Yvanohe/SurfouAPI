@@ -12,6 +12,8 @@ Hibernate create schema and dummy data are added on initialization : see resourc
 Endpoints :
 url on local database : http://localhost:9000/v1
 
+(For spots objects : geometry a GEOJSON)
+
 GET /spots  
 
 GET /spots/{id}
@@ -19,7 +21,7 @@ GET /spots/{id}
 POST /spots
 
 DELETE /spots/{id}
-(For spots objects : geometry a GEOJSON)
+
 
 GET /spottypes
 
