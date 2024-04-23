@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.locationtech.jts.geom.Point;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -46,13 +47,17 @@ public class Spot {
 	private boolean official;
 	
 	@ManyToOne @JoinColumn(name="creator_user_id", nullable = false)
+	//@JsonManagedReference
+	@JsonIncludeProperties({"id","username"})
 	private User creatorUser;
 	
 	@ManyToMany (mappedBy = "bookmarkedSpots")
-	private Set<User> bookmarkingUser; 
+	@JsonIncludeProperties("id")
+	private Set<User> bookmarkingUsers; 
 	
 	@ManyToOne
 	@JoinColumn(name ="type_id")
+	@JsonIncludeProperties("name")
 	private SpotType type;
 	
 	
@@ -115,11 +120,11 @@ public class Spot {
 	public void setCreatorUser(User creatorUser) {
 		this.creatorUser = creatorUser;
 	}
-	public Set<User> getBookmarkingUser() {
-		return bookmarkingUser;
+	public Set<User> getBookmarkingUsers() {
+		return bookmarkingUsers;
 	}
-	public void setBookmarkingUser(Set<User> bookmarkingUser) {
-		this.bookmarkingUser = bookmarkingUser;
+	public void setBookmarkingUsers(Set<User> bookmarkingUsers) {
+		this.bookmarkingUsers = bookmarkingUsers;
 	}
 	public SpotType getType() {
 		return type;

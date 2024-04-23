@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.lubac.surfouAPI.model.Spot;
 import fr.lubac.surfouAPI.model.User;
 import fr.lubac.surfouAPI.repository.SpotRepository;
@@ -32,7 +31,6 @@ public class SpotService {
 	
 	
 	public Iterable<Spot> getSpots() {
-		System.out.println("find all");
 		return spotRepository.findAll();
 	}
 

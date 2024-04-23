@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,7 @@ public class User {
 	private Date accountCreationDate = new Date(); 
 	
 	@OneToMany (targetEntity = Spot.class, mappedBy = "creatorUser")
+	//@JsonBackReference
 	private List<Spot> spotCreated;
 	
 	@ManyToMany
