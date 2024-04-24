@@ -27,19 +27,34 @@ public class WeatherConditionService {
 		return weatherConditionRepository.findByWindForce(windForce);
 	}
 	
-	public List<WeatherCondition> getWeatherConditionsAccordingWindForceAndDirection (int windForce, int windDirection) {
-		List<WeatherCondition> weatherConditionsFilteredByWindForceAndDirection = new ArrayList<WeatherCondition>(); 
+	public Iterable<WeatherCondition> getWeatherConditionsAccordingWindDirection (int windDirection) {
+		// get all Weather Conditions:
+		Iterable<WeatherCondition> weatherConditions = getWeatherConditions();
+		// filter by wind direction :
+		List<WeatherCondition> weatherConditionsFilteredByWindDirection = filterWeatherConditionsByWindDirection(weatherConditions, windDirection);
+		
+		return weatherConditionsFilteredByWindDirection;
+	}
+	
+	public List<WeatherCondition> getWeatherConditionsAccordingWindForceAndDirection (int windForce, int windDirection) {		
 		// 1 - first retrieve Weather conditions by wind force : 
 		Iterable<WeatherCondition> weatherConditionsFilteredByWindForce = getWeatherConditionsAccordingWindForce(windForce);
 		//2 - Filter this Iterable by wind direction compatibility :
-		for (WeatherCondition wc : weatherConditionsFilteredByWindForce) {
-			if (isWindDirectionCompatible(windDirection, wc.getMinWindDirection(), wc.getMaxWindDirection())){
-				weatherConditionsFilteredByWindForceAndDirection.add(wc);
-			}
-		}
+		List<WeatherCondition> weatherConditionsFilteredByWindForceAndDirection = filterWeatherConditionsByWindDirection(weatherConditionsFilteredByWindForce, windDirection); 
+		
 		return weatherConditionsFilteredByWindForceAndDirection;
 	}
 	
+	
+	private List<WeatherCondition> filterWeatherConditionsByWindDirection(Iterable<WeatherCondition> weatherConditionsToFilter, int windDirection) {
+		List<WeatherCondition> weatherConditionsFilteredByWindDirection = new ArrayList<WeatherCondition>();
+		for (WeatherCondition wc : weatherConditionsToFilter) {
+			if (isWindDirectionCompatible(windDirection, wc.getMinWindDirection(), wc.getMaxWindDirection())) {
+				weatherConditionsFilteredByWindDirection.add(wc);
+			}
+		}
+		return weatherConditionsFilteredByWindDirection;
+	}
 	
 	/**
 	 * 
@@ -57,8 +72,7 @@ public class WeatherConditionService {
 				compatible=true;
 			}
 		}
-		}
-	
+		}	
 		return compatible;
 	}
 }

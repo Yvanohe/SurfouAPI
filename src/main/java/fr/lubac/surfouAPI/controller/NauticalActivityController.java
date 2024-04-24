@@ -50,9 +50,12 @@ public class NauticalActivityController {
 			return nauticalActivityService.getNauticalActivitiesByWindcompatibility(Integer.valueOf(params.get("wforce")), Integer.valueOf(params.get("wdir")));	
 		}  else if (params.containsKey("wforce") && !params.containsKey("wdir")) {
 			return nauticalActivityService.getNauticalActivitiesByWindForcecompatibility(Integer.valueOf(params.get("wforce")));			
-		}  else {
+		}  else if (!params.containsKey("wforce") && params.containsKey("wdir")) {
+			return nauticalActivityService.getNauticalActivitiesByWindDirectionCompatibility(Integer.valueOf(params.get("wdir")));
+		} else {
 			return nauticalActivityService.getNauticalActivities();
-		}		
+		}	
+			
 	}
 
 }

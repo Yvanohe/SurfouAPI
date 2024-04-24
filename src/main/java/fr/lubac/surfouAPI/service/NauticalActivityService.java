@@ -32,16 +32,27 @@ public class NauticalActivityService {
 	public Iterable<NauticalActivity> getNauticalActivitiesByWindcompatibility(int windForce, int windDirection) {
 		//First - Retrieve all Weather conditions compatibles with given wind conditions (force and direction) :
 		Iterable<WeatherCondition> compatiblesWeatherCondition= weatherConditionService.getWeatherConditionsAccordingWindForceAndDirection(windForce, windDirection);
-
-		return getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+		//Then get set of Nautical Activity object extracted form the differents WeatherCondition objects
+		Set<NauticalActivity> nauticalActivitiesExtracted = getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+		return nauticalActivitiesExtracted;
 	}
 	
 	public Iterable<NauticalActivity> getNauticalActivitiesByWindForcecompatibility (int windForce) {
 		// First, retrieve all Weather conditions compatibles with given wind conditions (only force) :
 		Iterable<WeatherCondition> compatiblesWeatherCondition= weatherConditionService.getWeatherConditionsAccordingWindForce(windForce);
-
-		return getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+		// Then get set of Nautical Activity object extracted form the differents WeatherCondition objects
+		Set<NauticalActivity> nauticalActivitiesExtracted = getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+		return nauticalActivitiesExtracted;
 	}
+	
+	public Iterable<NauticalActivity> getNauticalActivitiesByWindDirectionCompatibility (int windDirection) {
+		// First, retrieve all Weather conditions compatibles with given wind conditions (only direction) :
+		Iterable<WeatherCondition> compatiblesWeatherCondition= weatherConditionService.getWeatherConditionsAccordingWindDirection(windDirection);
+		// Then get set of Nautical Activity object extracted form the differents WeatherCondition objects
+		Set<NauticalActivity> nauticalActivitiesExtracted = getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+		return nauticalActivitiesExtracted;
+	}
+	
 	
 	public void deleteAllNauticalActivitiesInGivenList (List<NauticalActivity> nauticalActivities_list){
 		for (NauticalActivity na : nauticalActivities_list ) {
