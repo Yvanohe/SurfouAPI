@@ -1,9 +1,14 @@
 package fr.lubac.surfouAPI.model;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class WeatherCondition {
@@ -30,20 +35,31 @@ public class WeatherCondition {
 	private Integer minWavePeriod;
 	private Integer maxWavePeriod;
 
+	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "weatherCondition")
+	@JsonBackReference
+	private Set<NauticalActivity> nauticalActivities;
 	
 //	===================
 //	GETTERS AND SETTERS
 //	===================
+	
+	
 	public Integer getMinWindDirection() {
 		return minWindDirection;
+	}
+	public Set<NauticalActivity> getNauticalActivities() {
+		return nauticalActivities;
+	}
+	public void setNauticalActivities(Set<NauticalActivity> nauticalActivities) {
+		this.nauticalActivities = nauticalActivities;
 	}
 	public void setMinWindDirection(int minWindDirection) {
 		this.minWindDirection = minWindDirection;
 	}
-	public Integer getMawWindDirection() {
+	public Integer getMaxWindDirection() {
 		return maxWindDirection;
 	}
-	public void setMawWindDirection(int mawWindDirection) {
+	public void setMaxWindDirection(int mawWindDirection) {
 		this.maxWindDirection = mawWindDirection;
 	}
 	public Integer getMinWindForce() {

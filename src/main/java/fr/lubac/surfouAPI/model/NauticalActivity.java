@@ -2,6 +2,7 @@ package fr.lubac.surfouAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
@@ -14,6 +15,10 @@ import jakarta.persistence.MapsId;
 public class NauticalActivity {
 	@EmbeddedId
 	private NauticalActivityID id;
+	
+	private String name;
+	private String description;
+	private boolean official;
 	
 	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@MapsId("spotID")
@@ -30,11 +35,10 @@ public class NauticalActivity {
 	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST} )
 	@MapsId("weatherConditionID")
 	@JoinColumn(name="weather_conditions_id")
+	@JsonManagedReference
 	private WeatherCondition weatherCondition;
 	
-	private String name;
-	private String description;
-	private boolean official;
+	
 	
 	
 	
