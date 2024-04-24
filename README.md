@@ -13,37 +13,9 @@ Endpoints :
 url on local database : http://localhost:9000/v1
 
 (For spots objects : geometry a GEOJSON)
+Swagger3 on http://localhost:9000/v1/swagger-ui/index.html#/ :
 
-GET /spots  
-
-GET /spots/{id}
-
-POST /spots
-
-DELETE /spots/{id}
-
-
-GET /spottypes
-
-POST /spottypes
-
-GET /nauticalactivities
-
-POST /nauticalactivities
-
-GET /activitiesdescriptions
-
-POST /activitiesdescriptions
-
-GET /conditions
-
-POST /conditions
-
-GET /users
-
-GET /users/{id}
-
-POST /users
+![alt text](image.png)
 
 WORK IN PROGRESS 
 
