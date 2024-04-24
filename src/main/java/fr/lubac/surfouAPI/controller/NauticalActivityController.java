@@ -48,7 +48,9 @@ public class NauticalActivityController {
 	public Iterable<NauticalActivity> getNauticalActivitiesByWindcompatibility (@RequestParam(required = false) Map<String, String> params ) {		
 		 if (params.containsKey("wforce") && params.containsKey("wdir")) {
 			return nauticalActivityService.getNauticalActivitiesByWindcompatibility(Integer.valueOf(params.get("wforce")), Integer.valueOf(params.get("wdir")));	
-		} else {
+		}  else if (params.containsKey("wforce") && !params.containsKey("wdir")) {
+			return nauticalActivityService.getNauticalActivitiesByWindForcecompatibility(Integer.valueOf(params.get("wforce")));			
+		}  else {
 			return nauticalActivityService.getNauticalActivities();
 		}		
 	}

@@ -30,23 +30,40 @@ public class NauticalActivityService {
 	}
 	
 	public Iterable<NauticalActivity> getNauticalActivitiesByWindcompatibility(int windForce, int windDirection) {
-		Set<NauticalActivity> compatibleNauticalActivities = new HashSet<NauticalActivity>();
-		//1- Retrieve all Weather conditions compatibles with given wind conditions :
+		//First - Retrieve all Weather conditions compatibles with given wind conditions (force and direction) :
 		Iterable<WeatherCondition> compatiblesWeatherCondition= weatherConditionService.getWeatherConditionsAccordingWindForceAndDirection(windForce, windDirection);
-		if (compatiblesWeatherCondition == null) {
-			return Collections.emptySet();
-		}
-		//2- For each compatiblesWeatherCondition, retrieve Nautical activities : 
-		for (WeatherCondition wc :compatiblesWeatherCondition  ) {
-			compatibleNauticalActivities.addAll(wc.getNauticalActivities());
-		}
-		return compatibleNauticalActivities;
+
+		return getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
+	}
+	
+	public Iterable<NauticalActivity> getNauticalActivitiesByWindForcecompatibility (int windForce) {
+		// First, retrieve all Weather conditions compatibles with given wind conditions (only force) :
+		Iterable<WeatherCondition> compatiblesWeatherCondition= weatherConditionService.getWeatherConditionsAccordingWindForce(windForce);
+
+		return getSetOfNauticalActivitiesFromWeatherConditions(compatiblesWeatherCondition);
 	}
 	
 	public void deleteAllNauticalActivitiesInGivenList (List<NauticalActivity> nauticalActivities_list){
 		for (NauticalActivity na : nauticalActivities_list ) {
 			nauticalActivityRepository.delete(na);
 		}		
+	}
+	
+	/**
+	 * 
+	 * @param Iterable object of WeatherCondition objects
+	 * @return Set of Nautical Activity object extracted form the differents WeatherCondition objects
+	 */
+	private Set<NauticalActivity> getSetOfNauticalActivitiesFromWeatherConditions (Iterable<WeatherCondition> weatherConditions) {
+		Set<NauticalActivity> nauticalActivities = new HashSet<NauticalActivity>();
+		if (weatherConditions == null) {
+			return Collections.emptySet();
+		} else {
+			for (WeatherCondition wc : weatherConditions) {
+				nauticalActivities.addAll(wc.getNauticalActivities());
+			}
+			return nauticalActivities;
+		}
 	}
 	
 	
