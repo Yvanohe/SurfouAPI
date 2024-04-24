@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.SpotType;
 import fr.lubac.surfouAPI.service.SpotTypeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="Spot type")
 @RestController
 public class SpotTypeController {
 	

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.ActivityDescription;
 import fr.lubac.surfouAPI.service.ActivityDescriptionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="Nautical activity description")
 @RestController
 public class ActivityDescriptionController {
 	

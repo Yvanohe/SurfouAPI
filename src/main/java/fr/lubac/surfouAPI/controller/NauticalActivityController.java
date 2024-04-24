@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.NauticalActivity;
 import fr.lubac.surfouAPI.service.NauticalActivityService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="Nautical activity", description="api for nautical activities associated with the location (spot) and compatible weather conditions")
 @RestController
 public class NauticalActivityController {
 	

@@ -14,7 +14,9 @@ import fr.lubac.surfouAPI.model.Spot;
 import fr.lubac.surfouAPI.model.User;
 import fr.lubac.surfouAPI.service.SpotService;
 import fr.lubac.surfouAPI.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="Spot")
 @RestController
 public class SpotController {
 	@Autowired

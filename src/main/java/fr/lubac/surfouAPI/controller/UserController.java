@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.User;
 import fr.lubac.surfouAPI.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name="User")
 @RestController
 public class UserController {
 	
