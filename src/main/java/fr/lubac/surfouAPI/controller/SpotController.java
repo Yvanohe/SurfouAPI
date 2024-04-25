@@ -32,6 +32,7 @@ public class SpotController {
 	 */
 	@PostMapping("/spots")
 	public Spot createSpot (@RequestBody Spot spot) {
+		System.out.println(spot.toString());
 		return spotService.saveSpot(spot);
 	}
 	

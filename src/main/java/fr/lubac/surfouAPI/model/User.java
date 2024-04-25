@@ -57,6 +57,7 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
+
 	public Set<Spot> getBookmarkedSpots() {
 		return bookmarkedSpots;
 	}
