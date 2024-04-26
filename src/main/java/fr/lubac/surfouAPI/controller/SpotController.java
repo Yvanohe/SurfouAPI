@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.Spot;
@@ -18,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="Spot")
 @RestController
+@RequestMapping("/spots")
 public class SpotController {
 	@Autowired
 	private SpotService spotService;
@@ -30,7 +32,7 @@ public class SpotController {
 	 * @param spot object
 	 * @return saved Spot object 
 	 */
-	@PostMapping("/spots")
+	@PostMapping
 	public Spot createSpot (@RequestBody Spot spot) {
 		return spotService.saveSpot(spot);
 	}
@@ -39,7 +41,7 @@ public class SpotController {
 	 * Delete a spot
 	 * @param id
 	 */
-	@DeleteMapping("/spots/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteSpot(@PathVariable("id") int id) {
 		spotService.deleteSpot(id);
 	}
@@ -48,7 +50,7 @@ public class SpotController {
 	 * Get all spots
 	 * @return - An Iterable object of Spot objects
 	 */
-	@GetMapping("/spots")
+	@GetMapping
 	public Iterable<Spot> getSpots() {
 		return spotService.getSpots();
 	}
@@ -57,7 +59,7 @@ public class SpotController {
 	 * @param id
 	 * @return selected spot
 	 */
-	@GetMapping("/spots/{id}")
+	@GetMapping("/{id}")
 	public Spot getSpot (@PathVariable("id") int id) {
 		Optional<Spot> spot = spotService.getSpot(id);
 		if (spot.isPresent()) {
@@ -72,7 +74,7 @@ public class SpotController {
 	 * @param id_spot
 	 * @return user
 	 */
-	@GetMapping("/spots/{id}/creatoruser")
+	@GetMapping("/{id}/creatoruser")
 	public User getSpotCreatorUser (@PathVariable("id") int id_spot) {
 		Spot spot = this.getSpot(id_spot);
 		User spotCreatorUser = null;
