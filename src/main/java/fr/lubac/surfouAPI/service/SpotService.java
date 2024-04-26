@@ -22,15 +22,16 @@ public class SpotService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public Spot saveSpot(Spot spot) {
-		Optional<User> creatorUser = userRepository.findById(spot.getCreatorUser().getId());
-        if (creatorUser.isPresent()) {
-            spot.setCreatorUser(creatorUser.get()); // Set the creator user before saving
-            return spotRepository.save(spot);
-        } else {
-            // handle the case where the user does not exist.
+	public Spot createSpot(Spot spot) {
+		//First, only create spot the id must be null as the CRUDRepository save method check if ID exist for choosing updating or creating new object in database
+		spot.deleteId();
+		// 2- verify presence of creatorUser parameter :
+		if (isSpotCreatorUserexists(spot) ) {
+			return spotRepository.save(spot);
+		} else {
+			// handle the case where the user does not exist.
             return null; 
-        }
+		}		      
 	}	
 	
 	public Iterable<Spot> getSpots() {
@@ -61,6 +62,18 @@ public class SpotService {
 		} else {
 			// Here  handle if spot doesn't exists
 		}
+	}
+	
+	public boolean isSpotCreatorUserexists (Spot spot) {
+		boolean userExists= false;
+		
+		if (spot.getCreatorUser()!=null ) {
+			Optional<User> creatorUser = userRepository.findById(spot.getCreatorUser().getId());
+	        if (creatorUser.isPresent()) {
+	        	userExists = true;
+	        } 
+		}
+		return userExists;		
 	}
 
 }

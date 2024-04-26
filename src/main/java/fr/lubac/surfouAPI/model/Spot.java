@@ -65,11 +65,13 @@ public class Spot {
 	private SpotType type;
 	
 	
-	
+
 //	===================
 //	GETTERS AND SETTERS
 //	===================
 	
+	
+
 	public List<NauticalActivity> getNauticalActivities() {
 		return nauticalActivities;
 	}
@@ -80,6 +82,10 @@ public class Spot {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void deleteId() {
+		this.id=0;
 	}
 
 	public String getName() {

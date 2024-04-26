@@ -34,7 +34,7 @@ public class SpotController {
 	 */
 	@PostMapping
 	public Spot createSpot (@RequestBody Spot spot) {
-		return spotService.saveSpot(spot);
+		return spotService.createSpot(spot);
 	}
 	
 	/**
