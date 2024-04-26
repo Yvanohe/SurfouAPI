@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.ActivityDescription;
@@ -12,12 +13,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="Nautical activity description")
 @RestController
+@RequestMapping("/activitiesdescriptions")
 public class ActivityDescriptionController {
 	
 	@Autowired
 	private ActivityDescriptionService activityDescriptionService;
 	
-	@PostMapping("/activitiesdescriptions")
+	@PostMapping
 	public ActivityDescription createActivity (@RequestBody ActivityDescription activityDescription) {
 		return activityDescriptionService.saveActivityDescription(activityDescription);
 	}
@@ -26,7 +28,7 @@ public class ActivityDescriptionController {
 	 *  Read - get all activities descriptions
 	 * @return An Iterable object of ActivityDescription objects full filled
 	 */
-	@GetMapping("/activitiesdescriptions")
+	@GetMapping
 	public Iterable<ActivityDescription> getActivityDescriptions () {
 		return activityDescriptionService.getActivityDescriptions();
 	}

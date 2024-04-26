@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.lubac.surfouAPI.model.User;
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="User")
 @RestController
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
@@ -25,7 +27,7 @@ public class UserController {
 	 * @param user object
 	 * @return saved user object 
 	 */
-	@PostMapping("/users")
+	@PostMapping
 	public User createUser(@RequestBody User user) {
 		return userService.saveUser(user);
 	}
@@ -33,7 +35,7 @@ public class UserController {
 	 * Read - get all users
 	 * @return An Iterable object of User objects full filled
 	 */
-	@GetMapping("/users")
+	@GetMapping
 	public Iterable<User> getUsers() {
 		return userService.getUsers();
 	}
@@ -43,7 +45,7 @@ public class UserController {
 	 * @param id
 	 * @return selected user
 	 */
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public User getUser (@PathVariable("id") int id) {
 		Optional<User> user = userService.getUser(id);
 		if (user.isPresent()) {

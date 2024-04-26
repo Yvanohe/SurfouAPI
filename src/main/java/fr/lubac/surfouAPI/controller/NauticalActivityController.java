@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name="Nautical activity", description="api for nautical activities associated with the location (spot) and compatible weather conditions")
 @RestController
+@RequestMapping("/nauticalactivities")
 public class NauticalActivityController {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class NauticalActivityController {
 	 * @param NauticalActivity object
 	 * @return saved NauticalActivity object 
 	 */
-	@PostMapping("/nauticalactivities")
+	@PostMapping
 	public NauticalActivity createNauticalActivity (@RequestBody NauticalActivity nauticalActivity) {
 		return nauticalActivityService.saveNauticalActivity(nauticalActivity);
 	}	
@@ -44,7 +46,7 @@ public class NauticalActivityController {
 	            		@Parameter(name ="wforce", required=false, description = "Wind force in Knots to filter nautical activities compatible with this wind force"),
 	            		@Parameter(name ="wdir", required=false, description = "Wind direction in degree (between 0 & 360°) to filter nautical activities compatible with this wind direction")
 	            })
-	@GetMapping("/nauticalactivities")
+	@GetMapping
 	public Iterable<NauticalActivity> getNauticalActivitiesByWindcompatibility (@RequestParam(required = false) Map<String, String> params ) {		
 		 if (params.containsKey("wforce") && params.containsKey("wdir")) {
 			return nauticalActivityService.getNauticalActivitiesByWindcompatibility(Integer.valueOf(params.get("wforce")), Integer.valueOf(params.get("wdir")));	
