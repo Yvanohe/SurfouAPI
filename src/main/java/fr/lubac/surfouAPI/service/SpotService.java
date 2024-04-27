@@ -28,14 +28,18 @@ public class SpotService {
 	private UserRepository userRepository;
 	
 	public Spot createSpot(Spot spot) {
-		//First, only create spot : the id must be null as the CRUDRepository save method check if ID exist for choosing updating or creating new object in database
+		//only create spot : the id must be null as the CRUDRepository save method check if ID exist for choosing updating or creating new object in database
 		spot.deleteId();
+		if (isSpotExists(spot)) {
+			//only create spot if id is not already in db:
+			throw new IllegalArgumentException("You canno't specify a spot wit id already in database to create a new one");			
+		}
 		// 2- verify presence of creatorUser parameter :
 		if (isSpotCreatorUserexists(spot) ) {
 			return spotRepository.save(spot);
 		} else {
 			// handle the case where the user does not exist.
-            return null; 
+			throw new IllegalArgumentException("Spot must have a creator user specified");
 		}		      
 	}	
 	
@@ -70,8 +74,7 @@ public class SpotService {
 	}
 	
 	public boolean isSpotCreatorUserexists (Spot spot) {
-		boolean userExists= false;
-		
+		boolean userExists= false;		
 		if (spot.getCreatorUser()!=null ) {
 			Optional<User> creatorUser = userRepository.findById(spot.getCreatorUser().getId());
 	        if (creatorUser.isPresent()) {
@@ -80,5 +83,18 @@ public class SpotService {
 		}
 		return userExists;		
 	}
+	
+	public boolean isSpotExists (Spot spot) {
+		boolean spotExists= false;		
+		if (spot.getId() !=0 ) {
+			Optional<Spot> spotInDb = spotRepository.findById(spot.getId());
+	        if (spotInDb.isPresent()) {
+	        	spotExists = true;
+	        } 
+		}
+		return spotExists;		
+	}
+	
+	
 
 }
