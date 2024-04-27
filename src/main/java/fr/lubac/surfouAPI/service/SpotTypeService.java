@@ -1,6 +1,8 @@
 package fr.lubac.surfouAPI.service;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,10 @@ public class SpotTypeService {
 	
 	public Iterable<SpotType> getSpotTypes () {
 		return spotTypeRepository.findAll();
+	}
+	
+	public Optional<SpotType> getSpotType(int id) {
+		return spotTypeRepository.findById(id);
 	}
 
 }
