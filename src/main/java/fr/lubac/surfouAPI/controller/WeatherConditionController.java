@@ -1,5 +1,7 @@
 package fr.lubac.surfouAPI.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +35,7 @@ public class WeatherConditionController {
 	@GetMapping
 	public Iterable<WeatherCondition> getWeatherConditions() {
 		return weatherConditionService.getWeatherConditions();
-	}
+	}	
 	
 	
 }
