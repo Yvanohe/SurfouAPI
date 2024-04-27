@@ -2,6 +2,7 @@ package fr.lubac.surfouAPI.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class WeatherConditionService {
 	
 	public Iterable<WeatherCondition> getWeatherConditions () {
 		return weatherConditionRepository.findAll();
+	}
+	
+	public Optional<WeatherCondition> getWeatherCondition(int id) {
+		return weatherConditionRepository.findById(id);
 	}
 	
 	public Iterable<WeatherCondition> getWeatherConditionsAccordingWindForce (int windForce) {

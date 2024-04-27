@@ -13,7 +13,7 @@ import jakarta.persistence.MapsId;
 @Entity
 public class NauticalActivity {
 	@EmbeddedId
-	private NauticalActivityID id;
+	private NauticalActivityID id = new NauticalActivityID();
 	
 	private String name;
 	private String description;
@@ -40,7 +40,6 @@ public class NauticalActivity {
 	
 	
 	
-	
 //	===================
 //	GETTERS AND SETTERS
 //	===================
@@ -49,6 +48,10 @@ public class NauticalActivity {
 	public Spot getSpot() {
 		return spot;
 	}
+	public NauticalActivityID getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}

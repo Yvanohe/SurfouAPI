@@ -14,6 +14,8 @@ public class NauticalActivityID implements Serializable {
 	private int activityDescriptionID;
 	private int weatherConditionID;
 	
+	
+	
 //	===================
 //	GETTERS AND SETTERS
 //	===================

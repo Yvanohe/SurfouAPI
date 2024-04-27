@@ -3,6 +3,7 @@ package fr.lubac.surfouAPI.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +17,18 @@ public class SpotService {
 	@Autowired
 	private SpotRepository spotRepository;
 	
-	@Autowired
+	
 	private NauticalActivityService nauticalActivityService;
+	@Autowired
+	public void setNauticalActivityService(@Lazy NauticalActivityService nauticalActivityService) {
+	        this.nauticalActivityService = nauticalActivityService;
+	 }
 	
 	@Autowired
 	private UserRepository userRepository;
 	
 	public Spot createSpot(Spot spot) {
-		//First, only create spot the id must be null as the CRUDRepository save method check if ID exist for choosing updating or creating new object in database
+		//First, only create spot : the id must be null as the CRUDRepository save method check if ID exist for choosing updating or creating new object in database
 		spot.deleteId();
 		// 2- verify presence of creatorUser parameter :
 		if (isSpotCreatorUserexists(spot) ) {

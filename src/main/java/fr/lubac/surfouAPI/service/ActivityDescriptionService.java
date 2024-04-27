@@ -1,5 +1,7 @@
 package fr.lubac.surfouAPI.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class ActivityDescriptionService {
 	
 	public Iterable<ActivityDescription> getActivityDescriptions(){
 		return activityDescriptionRepository.findAll();
+	}
+	
+	public Optional<ActivityDescription> getActivityDescription(int id) {
+		return activityDescriptionRepository.findById(id);
 	}
 
 }
