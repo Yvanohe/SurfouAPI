@@ -17,7 +17,6 @@ public class UserService {
 	public User saveUser(User user)  {
 		if(user.getPassword() == null) {
 			throw new IllegalArgumentException("A password must be provided for creating a new user");
-			
 		}
 		User savedUser = userRepository.save(user);
 		return savedUser;

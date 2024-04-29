@@ -39,7 +39,7 @@ public class SpotService {
 			return spotRepository.save(spot);
 		} else {
 			// handle the case where the user does not exist.
-			throw new IllegalArgumentException("Spot must have a creator user specified");
+			throw new IllegalArgumentException("Spot must have a creatorUser specified");
 		}		      
 	}	
 	

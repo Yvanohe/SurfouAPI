@@ -3,6 +3,7 @@ package fr.lubac.surfouAPI.service;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.lubac.surfouAPI.exceptions.MessageReader;
 import fr.lubac.surfouAPI.model.ActivityDescription;
 import fr.lubac.surfouAPI.model.NauticalActivity;
 import fr.lubac.surfouAPI.model.Spot;
@@ -28,6 +30,9 @@ public class NauticalActivityService {
 	private SpotService spotService;
 	@Autowired
 	private ActivityDescriptionService activityDescriptionService;
+	
+	@Autowired
+	private MessageReader messageReader;
 
 	/**
 	 * We can create a NauticalActivity association by 3 ways :
@@ -41,7 +46,8 @@ public class NauticalActivityService {
 	public NauticalActivity saveNauticalActivity (NauticalActivity nauticalActivity) {
 		//For Spot, ActivityDescription and WeatherCondition, check if there is at least an Id provided or an object :
 		if (nauticalActivity.getId().getSpotID() == 0 && nauticalActivity.getSpot() == null ) {
-			throw new IllegalArgumentException("Nautical activity should have a spot object or a spotID provided");
+			//throw new IllegalArgumentException("Nautical activity should have a spot object or a spotID provided");
+			throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_SPOT_OR_SPOTID_REQUIRED_RULE, Locale.FRENCH));
 		}
 		if (nauticalActivity.getId().getActivityDescriptionID() == 0 && nauticalActivity.getActivityDescription() == null ) {
 			throw new IllegalArgumentException("Nautical activity should have a activityDescription object or a activityDescriptionID provided");
