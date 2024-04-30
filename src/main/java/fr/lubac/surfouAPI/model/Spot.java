@@ -84,10 +84,6 @@ public class Spot {
 		return id;
 	}
 	
-	public void deleteId() {
-		this.id=0;
-	}
-
 	public String getName() {
 		return name;
 	}

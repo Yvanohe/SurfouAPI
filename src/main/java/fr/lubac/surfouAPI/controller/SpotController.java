@@ -37,22 +37,20 @@ public class SpotController {
 	 */
 	@PostMapping
 	public ResponseEntity<?> createSpot (@RequestBody Spot spot) {
-		try {
-			Spot newSpotAdded = spotService.createSpot(spot);
-			// if spot not added or null : return 204 No Content
-			if (newSpotAdded == null){
-				return ResponseEntity.noContent().build();			
-			} else { // return 201 and URI to this new resource added
-				URI location = ServletUriComponentsBuilder
-						.fromCurrentRequest()
-						.path("/{id}")
-						.buildAndExpand(newSpotAdded.getId())
-						.toUri();
-				return ResponseEntity.created(location).build();
-			}
-		} catch (IllegalArgumentException ex) {
-			return ResponseEntity.badRequest().body("Error : " + ex.getMessage());
+		
+		Spot newSpotAdded = spotService.createSpot(spot);
+		// if spot not added or null : return 204 No Content
+		if (newSpotAdded == null){
+			return ResponseEntity.noContent().build();			
+		} else { // return 201 and URI to this new resource added
+			URI location = ServletUriComponentsBuilder
+					.fromCurrentRequest()
+					.path("/{id}")
+					.buildAndExpand(newSpotAdded.getId())
+					.toUri();
+			return ResponseEntity.created(location).build();
 		}
+		
 	}
 	
 	/**
@@ -80,11 +78,9 @@ public class SpotController {
 	@GetMapping("/{id}")
 	public Spot getSpot (@PathVariable("id") int id) {
 		Optional<Spot> spot = spotService.getSpot(id);
-		if (spot.isPresent()) {
-			return spot.get();
-		} else {
-			return null;
-		}
+		
+		return spot.get();
+		
 	}
 	
 	/**

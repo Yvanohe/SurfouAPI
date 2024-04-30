@@ -17,6 +17,7 @@ public class MessageReader {
 		try {
 			message = messageSource.getMessage(String.valueOf(code), null, locale);
 		} catch (Exception e) {
+			System.out.println(e);
 			message = "An unknown error occured";
 		}
 		return message;

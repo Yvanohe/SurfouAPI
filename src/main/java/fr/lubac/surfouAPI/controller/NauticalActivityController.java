@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,6 @@ import fr.lubac.surfouAPI.service.NauticalActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityExistsException;
 
 @Tag(name="Nautical activity", description="api for nautical activities associated with the location (spot) and compatible weather conditions")
 @RestController
@@ -39,18 +37,14 @@ public class NauticalActivityController {
 	 */
 	@PostMapping
 	public ResponseEntity<?> createNauticalActivity (@RequestBody NauticalActivity nauticalActivity) {
-		try {
-			nauticalActivityService.saveNauticalActivity(nauticalActivity);
-			URI location = ServletUriComponentsBuilder
-					.fromCurrentRequest()
-					.build()
-					.toUri();
-			return ResponseEntity.created(location).build();
-		} catch (IllegalArgumentException ex) {
-			return ResponseEntity.badRequest().body("Error : " + ex.getMessage());
-		} catch (EntityExistsException ex) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Error : " + ex.getMessage());
-		} 
+		nauticalActivityService.saveNauticalActivity(nauticalActivity);
+		
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.build()
+				.toUri();
+		return ResponseEntity.created(location).build();
+		
 	}	
 
 	/**

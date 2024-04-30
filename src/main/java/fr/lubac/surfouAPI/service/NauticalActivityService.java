@@ -8,9 +8,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.lubac.surfouAPI.exceptions.ErrorCodesServices;
 import fr.lubac.surfouAPI.exceptions.MessageReader;
 import fr.lubac.surfouAPI.model.ActivityDescription;
 import fr.lubac.surfouAPI.model.NauticalActivity;
@@ -44,16 +46,17 @@ public class NauticalActivityService {
 	 */
 	@Transactional
 	public NauticalActivity saveNauticalActivity (NauticalActivity nauticalActivity) {
+		Locale locale =  LocaleContextHolder.getLocale();
+		
 		//For Spot, ActivityDescription and WeatherCondition, check if there is at least an Id provided or an object :
 		if (nauticalActivity.getId().getSpotID() == 0 && nauticalActivity.getSpot() == null ) {
-			//throw new IllegalArgumentException("Nautical activity should have a spot object or a spotID provided");
-			throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_SPOT_OR_SPOTID_REQUIRED_RULE, Locale.FRENCH));
+			throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_SPOT_OR_SPOTID_REQUIRED_RULE, locale));
 		}
 		if (nauticalActivity.getId().getActivityDescriptionID() == 0 && nauticalActivity.getActivityDescription() == null ) {
-			throw new IllegalArgumentException("Nautical activity should have a activityDescription object or a activityDescriptionID provided");
+			throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_ACTIVITYDESCR_OR_ACTIVITYDESCID_REQUIRED_RULE, locale));
 		}
 		if (nauticalActivity.getId().getWeatherConditionID() == 0 && nauticalActivity.getWeatherCondition() == null ) {
-			throw new IllegalArgumentException("Nautical activity should have a weatherCondition object or a weatherConditionID provided");
+			throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_WEATHERC_OR_WEATHERCID_REQUIRED_RULE, locale));
 		}
 		
 		
@@ -65,7 +68,7 @@ public class NauticalActivityService {
 			if (nauticalActivity.getId().getSpotID() == nauticalActivity.getSpot().getId() ) {
 				idSpotToRetrieveIfExists = nauticalActivity.getSpot().getId();
 			} else {
-				throw new IllegalArgumentException("spotID and spot object's ids provided are not coherents");				
+				throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_SPOT_SPOTID_COHERENTS_RULE, locale));				
 			}	
 			//if only one is provided :		
 		} else {			
@@ -75,7 +78,7 @@ public class NauticalActivityService {
 				idSpotToRetrieveIfExists = nauticalActivity.getId().getSpotID();
 				// In this case already check if spot exists and if not, throw an exception (there will be no spot to add in Nautical Activity)
 				if (getSpotIfExists(idSpotToRetrieveIfExists) == null) {
-					throw new IllegalArgumentException("spotID provided doesn't exists in database. Provide an existing one or define a new Spot object");
+					throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_SPOTID_NOTFOUND, locale));
 				}
 			}
 		}
@@ -85,7 +88,7 @@ public class NauticalActivityService {
 			if (nauticalActivity.getId().getActivityDescriptionID() == nauticalActivity.getActivityDescription().getId()) {
 				idActivityDescriptionToRetrieveIfExists = nauticalActivity.getActivityDescription().getId();
 			} else {
-				throw new IllegalArgumentException("activityDescriptionID and activityDescription object's ids provided are not coherents");
+				throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_ACTIVITYDESCR_ACTIVITYDESCRID_COHERENTS_RULE, locale));
 			}
 		} else {
 			if(nauticalActivity.getId().getActivityDescriptionID() == 0) {
@@ -93,7 +96,7 @@ public class NauticalActivityService {
 			} else {				
 				idActivityDescriptionToRetrieveIfExists =nauticalActivity.getId().getActivityDescriptionID();
 				if (getActivityDescriptionIfexists(idActivityDescriptionToRetrieveIfExists)==null) {
-					throw new IllegalArgumentException("activityDescriptionID provided doesn't exists in database. Provide an existing one or define a new ActivityDescription object");
+					throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_ACTIVITYDESCRID_NOTFOUND, locale));
 				}
 			}
 		}
@@ -103,7 +106,7 @@ public class NauticalActivityService {
 			if (nauticalActivity.getId().getWeatherConditionID() == nauticalActivity.getWeatherCondition().getId()) {
 				idWeatherConditionToRetrieveIfExists = nauticalActivity.getWeatherCondition().getId();
 			} else {
-				throw new IllegalArgumentException("weatherConditionID and weatherCondition object's ids provided are not coherents");
+				throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_WEATHERC_WEATHERCID_COHERENTS_RULE, locale));
 			}
 		} else {
 			if(nauticalActivity.getId().getWeatherConditionID() == 0) {
@@ -111,14 +114,14 @@ public class NauticalActivityService {
 			} else {
 				idWeatherConditionToRetrieveIfExists =  nauticalActivity.getId().getWeatherConditionID();
 				if (getWeatherConditionIfExists(idWeatherConditionToRetrieveIfExists) == null) {
-					throw new IllegalArgumentException("weatherConditionID provided doesn't exists in database. Provide an existing one or define a new ActivityDescription object");
+					throw new IllegalArgumentException(messageReader.getMessageErreur(ErrorCodesServices.NA_WEATHERCID_NOTFOUND, locale));
 				}
 			}
 		}	
 		//Check if association already exists (no update for create method):
 		Optional<NauticalActivity> na = nauticalActivityRepository.findByIDs(idSpotToRetrieveIfExists, idActivityDescriptionToRetrieveIfExists, idWeatherConditionToRetrieveIfExists);
 		if (na.isPresent()) {
-			throw new EntityExistsException("The spot/activityDescription/weatherCondition association provided already exists");
+			throw new EntityExistsException(messageReader.getMessageErreur(ErrorCodesServices.NA_ASSOCIATION_ALREADY_EXISTS, locale));
 		}
 		
 		//Retrieve the different objets by the Id (because the existing object will not be updated in this create method)
