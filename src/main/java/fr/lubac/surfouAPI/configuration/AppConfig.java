@@ -1,4 +1,4 @@
-package fr.lubac.surfouAPI;
+package fr.lubac.surfouAPI.configuration;
 
 import java.util.Locale;
 
