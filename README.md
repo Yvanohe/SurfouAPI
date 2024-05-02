@@ -10,12 +10,14 @@ user: surfouAdmin & password: Pa$$w0rd
 Hibernate create schema and dummy data are added on initialization : see resources/data.sql
 
 Endpoints :
-url on local database : http://localhost:9000/v1
+url : http://localhost:[port]/v1
 
-(For spots objects : geometry a GEOJSON)
+
 Swagger3 on http://localhost:9000/v1/swagger-ui/index.html#/ :
 
 ![alt text](image.png)
+
+(For spot objects : geometry a GEOJSON)
 
 WORK IN PROGRESS 
 
