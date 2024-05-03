@@ -3,12 +3,15 @@ package fr.lubac.surfouAPI.configuration;
 import java.util.Locale;
 
 import org.n52.jackson.datatype.jts.JtsModule;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
+
+import fr.lubac.surfouAPI.security.RsaKeyProperties;
 
 @Configuration
 public class AppConfig {
