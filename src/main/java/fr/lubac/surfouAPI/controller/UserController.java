@@ -25,29 +25,30 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	/**
-	 * Add a new suser in database
-	 * @param user object
-	 * @return saved user object 
-	 */
-	@PostMapping
-	public ResponseEntity<?> createUser(@RequestBody User user) {
-		try {
-		User newUserAdded = userService.saveUser(user);
-			if (newUserAdded == null) {
-				return ResponseEntity.noContent().build();
-			} else {
-				URI location = ServletUriComponentsBuilder
-						.fromCurrentRequest()
-						.path("/{id}")
-						.buildAndExpand(newUserAdded.getId())
-						.toUri();
-				return ResponseEntity.created(location).build();
-			}
-		} catch (IllegalArgumentException ex ) {
-			return ResponseEntity.badRequest().body("Error : " + ex.getMessage());
-		}
-	}
+	// CreateUser to be put in AuthController (/auth/register)
+//	/**
+//	 * Add a new suser in database
+//	 * @param user object
+//	 * @return saved user object 
+//	 */
+//	@PostMapping
+//	public ResponseEntity<?> createUser(@RequestBody User user) {
+//		try {
+//		User newUserAdded = userService.saveUser(user);
+//			if (newUserAdded == null) {
+//				return ResponseEntity.noContent().build();
+//			} else {
+//				URI location = ServletUriComponentsBuilder
+//						.fromCurrentRequest()
+//						.path("/{id}")
+//						.buildAndExpand(newUserAdded.getId())
+//						.toUri();
+//				return ResponseEntity.created(location).build();
+//			}
+//		} catch (IllegalArgumentException ex ) {
+//			return ResponseEntity.badRequest().body("Error : " + ex.getMessage());
+//		}
+//	}
 	/**
 	 * Read - get all users
 	 * @return An Iterable object of User objects full filled

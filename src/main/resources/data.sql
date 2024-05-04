@@ -3,8 +3,8 @@ Insert into role (name) values ('ADMIN');
 Insert into role (name) values ('USER');
 
 -- Insert into user_account:
-Insert into user_account (username, password, email, role_id) values ('admin','Pa$$w0rd','y.lubac@gmail.com',1);
-Insert into user_account (username, password, email, role_id) values ('toto','titi','toto@titi.com',2);
+Insert into user_account (username, password, email, role_id) values ('admin','$2a$10$HsNkO6vurIWrLDpon7.gl.73TgqjdfissIwY63cUf3nD3V734jz0e','y.lubac@gmail.com',1);
+Insert into user_account (username, password, email, role_id) values ('toto','$2a$10$HsNkO6vurIWrLDpon7.gl.73TgqjdfissIwY63cUf3nD3V734jz0e','toto@titi.com',2);
 
 -- Insert into spot_type
 Insert into spot_type (name, description) values ('beach', 'classic sand beach');

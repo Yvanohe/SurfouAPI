@@ -1,11 +1,14 @@
 package fr.lubac.surfouAPI.security;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +16,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -28,6 +32,8 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
+import fr.lubac.surfouAPI.service.UserService;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -38,6 +44,9 @@ public class SpringSecurityConfig {
 	public SpringSecurityConfig( RsaKeyProperties rsaKeys) {
 		this.rsaKeys = rsaKeys;
 	}
+	
+	@Autowired
+	private UserService customUserDetailService;
 	
 	@Bean
 	public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
@@ -69,16 +78,24 @@ public class SpringSecurityConfig {
 	
 	
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//For test purpose : create an user in memory
+	//configure Spring Security to use UserService (which implements UserDetailsService) to authenticate users.
 	@Bean
-	public UserDetailsService users() {
-		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("password")).roles("USER").build();
-		return new InMemoryUserDetailsManager(user);
+	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
+		authenticationManagerBuilder.parentAuthenticationManager(null);
+		return authenticationManagerBuilder.build();
 	}
+	//For test purpose : create an user in memory
+//	@Bean
+//	public UserDetailsService users() {
+//		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("password")).roles("USER").build();
+//		return new InMemoryUserDetailsManager(user);
+//	}
 	
 	
 	
@@ -95,5 +112,6 @@ public class SpringSecurityConfig {
 		JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 		return new NimbusJwtEncoder(jwks);
 	}
+	
 	
 }
