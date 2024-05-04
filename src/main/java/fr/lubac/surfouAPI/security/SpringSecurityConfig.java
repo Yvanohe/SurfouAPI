@@ -52,8 +52,11 @@ public class SpringSecurityConfig {
 		return http.csrf(csrf -> csrf.disable()) //useless csrf protection because 1/no session cookie(statless) and use of a Bearer token
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //no session cookie(statless) 
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll();
+					//auth.requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll();
 					auth.requestMatchers(HttpMethod.POST).hasRole("ADMIN");
+					auth.requestMatchers(HttpMethod.DELETE).hasRole("ADMIN");
+					auth.requestMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN");
+					auth.requestMatchers(HttpMethod.GET).permitAll();			
 					auth.anyRequest().authenticated(); //All request need authentication
 				})				
 				.oauth2ResourceServer(
