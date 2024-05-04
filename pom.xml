@@ -16,6 +16,30 @@
 	<properties>
 		<java.version>21</java.version>
 	</properties>
+	
+    <!-- =============================================================== -->
+    <!-- Profils -->
+    <!-- =============================================================== -->
+    <profiles>
+        <!-- Profil pour l'environnement de développement -->
+        <profile>
+            <id>dev</id>
+            <activation>
+            	<activeByDefault>true</activeByDefault>
+        	</activation>
+	        <properties>
+	            <spring.profiles.active>dev</spring.profiles.active>
+	        </properties>
+        </profile>
+        <!-- Profil pour l'environnement de production -->
+        <profile>
+            <id>prod</id>
+            <properties>
+	            <spring.profiles.active>prod</spring.profiles.active>
+	        </properties>
+        </profile>
+    </profiles>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,11 +92,21 @@
 	</dependencies>
 
 	<build>
+		<finalName>SurfouAPI</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+				<executions>
+					<execution>
+						<id>repackage</id>
+			            <goals>
+			              <goal>repackage</goal>
+			            </goals>			    
+					</execution>
+				</executions>
+				
+			</plugin>			
 		</plugins>
 	</build>
 

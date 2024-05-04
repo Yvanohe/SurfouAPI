@@ -27,6 +27,11 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity @Table(name="user_account")
 public class User implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int id;
 	
