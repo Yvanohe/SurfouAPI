@@ -1,7 +1,7 @@
 # SurfouAPI
 
 SPRINGBOOT 3.2.4 + Hibernate Spatial + PostgreSQL16 (& PostGIS) + GeoJSON
-secured with SPRING SECURITY
+and secured with SPRING SECURITY
 
 REST API to retrieve locations of various nautical activities such as kitesurfing, windsurfing, etc., along with their associated ideal weather conditions. Users can query the API to get detailed information based on activity type, location, or weather conditions.
 
