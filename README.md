@@ -5,6 +5,7 @@ and secured with SPRING SECURITY
 
 REST API to retrieve locations of various nautical activities such as kitesurfing, windsurfing, etc., along with their associated ideal weather conditions. Users can query the API to get detailed information based on activity type, location, or weather conditions.
 
+Online on : https://www.surfou.fr/v1
 
 Create a database "surfoudb" with postgis extension : see createDb.sql
 user: surfouAdmin & password: Pa$$w0rd
