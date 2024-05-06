@@ -29,7 +29,7 @@ Endpoints :
 url : http://localhost:[port]/v1
 Get the token on /auth/login endpoint with "user"/"password" credentials.
 
-Swagger3 on http://localhost:9000/v1/swagger-ui/index.html#/ :
+Swagger3 on http://localhost:9000/v1/swagger-ui/index.html#/ (or https://www.surfou.fr/v1/swagger-ui/index.html for online version) :
 
 ![alt text](image.png)
 
