@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import fr.lubac.surfouAPI.security.RsaKeyProperties;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
 
-
+@OpenAPIDefinition(servers = {@Server(url = "/v1", description = "Default Server URL")})
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
 public class SurfouApiApplication {

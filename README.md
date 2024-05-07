@@ -27,7 +27,7 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out priv
 
 Endpoints :
 url : http://localhost:[port]/v1
-Get the token on /auth/login endpoint with "user"/"password" credentials.
+Get the token on /auth/login endpoint with "admin"/"password" credentials.
 
 Swagger3 on http://localhost:9000/v1/swagger-ui/index.html#/ (or https://www.surfou.fr/v1/swagger-ui/index.html for online version) :
 
