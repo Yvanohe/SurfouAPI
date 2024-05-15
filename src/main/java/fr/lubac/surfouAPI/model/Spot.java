@@ -25,6 +25,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Spot {
@@ -33,8 +34,10 @@ public class Spot {
 	private int id;
 	
 	@NotNull
+	@Size (min =3, max = 30)
 	private String name;
 	
+	@Size (min =3, max = 30)
 	private String city;
 	
 	@JsonSerialize(using = GeometrySerializer.class)
@@ -47,7 +50,11 @@ public class Spot {
 	private List<NauticalActivity> nauticalActivities;
 	
 	private String imageUrl;
+	
+	@Size (min =3, max = 600)
 	private String comment;
+	
+	@NotNull
 	private boolean official;
 	
 	@ManyToOne @JoinColumn(name="creator_user_id", nullable = false)

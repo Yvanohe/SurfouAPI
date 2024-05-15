@@ -9,14 +9,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class NauticalActivity {
 	@EmbeddedId
 	private NauticalActivityID id = new NauticalActivityID();
 	
+	@Size (min =3, max = 30)
 	private String name;
+	
+	@Size (min =3, max = 200)
 	private String description;
+	
+	@NotNull
 	private boolean official;
 	
 	@ManyToOne (cascade = {CascadeType.MERGE, CascadeType.PERSIST})

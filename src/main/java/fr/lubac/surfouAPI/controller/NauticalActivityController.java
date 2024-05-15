@@ -20,6 +20,7 @@ import fr.lubac.surfouAPI.service.NauticalActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name="Nautical activity", description="api for nautical activities associated with the location (spot) and compatible weather conditions")
 @RestController
@@ -36,7 +37,7 @@ public class NauticalActivityController {
 	 * @return saved NauticalActivity object 
 	 */
 	@PostMapping
-	public ResponseEntity<?> createNauticalActivity (@RequestBody NauticalActivity nauticalActivity) {
+	public ResponseEntity<?> createNauticalActivity (@Valid @RequestBody NauticalActivity nauticalActivity) {
 		nauticalActivityService.saveNauticalActivity(nauticalActivity);
 		
 		URI location = ServletUriComponentsBuilder

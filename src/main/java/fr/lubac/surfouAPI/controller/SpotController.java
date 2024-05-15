@@ -19,6 +19,7 @@ import fr.lubac.surfouAPI.model.User;
 import fr.lubac.surfouAPI.service.SpotService;
 import fr.lubac.surfouAPI.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name="Spot")
 @RestController
@@ -36,7 +37,7 @@ public class SpotController {
 	 * @return saved Spot object 
 	 */
 	@PostMapping
-	public ResponseEntity<?> createSpot (@RequestBody Spot spot) {
+	public ResponseEntity<?> createSpot (@Valid @RequestBody Spot spot) {
 		
 		Spot newSpotAdded = spotService.createSpot(spot);
 		// if spot not added or null : return 204 No Content

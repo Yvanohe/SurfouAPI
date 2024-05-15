@@ -24,6 +24,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 @Entity @Table(name="user_account")
 public class User implements UserDetails {
@@ -45,6 +46,7 @@ public class User implements UserDetails {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	
+	@Past
 	private Date accountCreationDate = new Date(); 
 	
 	@OneToMany (targetEntity = Spot.class, mappedBy = "creatorUser")

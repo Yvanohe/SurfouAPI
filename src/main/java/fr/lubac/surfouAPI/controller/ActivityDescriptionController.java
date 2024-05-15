@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import fr.lubac.surfouAPI.model.ActivityDescription;
 import fr.lubac.surfouAPI.service.ActivityDescriptionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name="Nautical activity description")
 @RestController
@@ -24,7 +25,7 @@ public class ActivityDescriptionController {
 	private ActivityDescriptionService activityDescriptionService;
 	
 	@PostMapping
-	public ResponseEntity<ActivityDescription> createActivity (@RequestBody ActivityDescription activityDescription) {
+	public ResponseEntity<ActivityDescription> createActivity (@Valid @RequestBody ActivityDescription activityDescription) {
 		ActivityDescription newADescriptionAdded = activityDescriptionService.saveActivityDescription(activityDescription);
 		// if activity not added or null : return 204 No Content
 		if(newADescriptionAdded == null) {

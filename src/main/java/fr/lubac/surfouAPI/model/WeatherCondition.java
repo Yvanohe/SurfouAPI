@@ -2,6 +2,8 @@ package fr.lubac.surfouAPI.model;
 
 import java.util.Set;
 
+import org.hibernate.validator.constraints.Range;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -21,18 +23,38 @@ public class WeatherCondition {
 	 * Heights in meters (m)
 	 * Periods in seconds (s)
 	 */
-	
+	@Range(min=0, max=360)
 	private Integer minWindDirection;
+	
+	@Range(min=0, max=360)
 	private Integer  maxWindDirection;
+	
+	@Range(min=0, max=100)	
 	private Integer  minWindForce;
+	
+	@Range(min=0, max=100)
 	private Integer  maxWindForce;
+	
+	@Range(min=0, max=18)
 	private Float minTideHeight;
+	@Range(min=0, max=18)
 	private Float maxTideHeight;
+	
+	@Range(min=0, max=360)
 	private Integer minWaveDirection;
+	
+	@Range(min=0, max=360)
 	private Integer maxWaveDirection;
+	
+	@Range(min=0, max=50)
 	private Float minWaveHeight;
+	@Range(min=0, max=50)
 	private Float maxWaveHeight;
+	
+	@Range(min=0, max=30)
 	private Integer minWavePeriod;
+	
+	@Range(min=0, max=30)
 	private Integer maxWavePeriod;
 
 	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "weatherCondition")
@@ -47,6 +69,7 @@ public class WeatherCondition {
 	public Integer getMinWindDirection() {
 		return minWindDirection;
 	}
+	
 	public Set<NauticalActivity> getNauticalActivities() {
 		return nauticalActivities;
 	}

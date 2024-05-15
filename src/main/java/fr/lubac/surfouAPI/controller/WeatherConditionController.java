@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import fr.lubac.surfouAPI.model.WeatherCondition;
 import fr.lubac.surfouAPI.service.WeatherConditionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name="Weather condition")
 @RestController
@@ -32,7 +33,7 @@ public class WeatherConditionController {
 	 * @return saved WeatherCondition object
 	 */
 	@PostMapping
-	public ResponseEntity<WeatherCondition> createWeatherCondition (@RequestBody WeatherCondition weatherCondition) {
+	public ResponseEntity<WeatherCondition> createWeatherCondition (@Valid @RequestBody WeatherCondition weatherCondition) {
 		WeatherCondition newWeatherConditionAdded = weatherConditionService.saveWeatherCondition(weatherCondition);
 		if (newWeatherConditionAdded == null) {
 			return ResponseEntity.noContent().build();	

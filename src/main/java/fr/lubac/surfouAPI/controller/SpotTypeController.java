@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import fr.lubac.surfouAPI.model.SpotType;
 import fr.lubac.surfouAPI.service.SpotTypeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name="Spot type")
 @RestController
@@ -31,7 +32,7 @@ public class SpotTypeController {
 	 * @return saved SpotType object 
 	 */
 	@PostMapping
-	public ResponseEntity<SpotType> createSpotType (@RequestBody SpotType spotType) {
+	public ResponseEntity<SpotType> createSpotType (@Valid @RequestBody SpotType spotType) {
 		SpotType newSpotTypeAdded = spotTypeService.saveSpotType(spotType);
 		if (newSpotTypeAdded == null) {
 			return ResponseEntity.noContent().build();

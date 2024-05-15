@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class ActivityDescription {
@@ -14,8 +15,11 @@ public class ActivityDescription {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Size (min =3, max = 30)
 	private String name;
+	@Size (min =3, max = 200)
 	private String description;
+	
 	private String urlPhoto;
 	
 	@OneToMany(targetEntity = NauticalActivity.class, mappedBy = "activityDescription")
